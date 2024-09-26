@@ -1,0 +1,24 @@
+# Dart tools
+.dart_tool/
+
+# Flutter build directory
+build/
+
+# IDE settings (Android Studio/IntelliJ)
+.idea/
+
+# VSCode settings - ignore all except workspace-specific settings
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# Distribution folder
+.dist/
+
+# DevTools configuration
+devtools_options.yaml
+
+# Flutter plugin management files
+.flutter-plugins
+.flutter-plugins-dependencies
