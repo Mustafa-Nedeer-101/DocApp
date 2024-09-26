@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Doc Development",
+        "program": "lib/main_development.dart",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "debug",
+        "args": [
+          "--flavor",
+          "development"
+        ]
+      },
+
+
+      {
+        "name": "Doc Production",
+        "program": "lib/main_production.dart",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "debug",
+        "args": [
+          "--flavor", 
+          "production"
+        ]
+      }
+    ],
+  }
