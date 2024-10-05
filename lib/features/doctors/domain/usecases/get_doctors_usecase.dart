@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:maser_project/core/dep_injection/dependency_injection.dart';
+import 'package:maser_project/core/dependency_injection/dependency_injection.dart';
 import 'package:maser_project/core/errors/failure.dart';
 import 'package:maser_project/core/params/params.dart';
 import 'package:maser_project/features/authentication/data/repositories/auth_repo.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maser_project/core/constants/colors.dart';
-import 'package:maser_project/core/widgets/section_header.dart';
+import 'package:maser_project/core/common_widgets/section_header.dart';
 import 'package:maser_project/features/home/presentation/widgets/doctors_list/doctors_list_view.dart';
 import 'package:maser_project/features/home/presentation/widgets/home_app_bar.dart';
 import 'package:maser_project/features/home/presentation/widgets/home_doctors_banner.dart';

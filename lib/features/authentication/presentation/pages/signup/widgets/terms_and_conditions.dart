@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:maser_project/core/theming/text_styles.dart';
+import 'package:maser_project/core/constants/colors.dart';
+import 'package:maser_project/core/constants/texts.dart';
 
 class TermsAndConditions extends StatelessWidget {
   const TermsAndConditions({super.key});
@@ -10,15 +11,23 @@ class TermsAndConditions extends StatelessWidget {
       textAlign: TextAlign.center,
       text: TextSpan(children: [
         TextSpan(
-            text: 'By logging, you agree to our',
-            style: TextStyles.font13GreyWeightRegular),
+            text: CTexts.bySigning,
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(color: CColors.grey)),
         TextSpan(
-            text: ' Terms & Conditions',
-            style: TextStyles.font13DarkBlueWeightMedium),
-        TextSpan(text: ' and', style: TextStyles.font13GreyWeightRegular),
+            text: CTexts.termsAndConditions,
+            style: Theme.of(context).textTheme.bodyLarge),
         TextSpan(
-            text: ' Privacy Policy',
-            style: TextStyles.font13DarkBlueWeightMedium.copyWith(height: 1.5)),
+            text: CTexts.and,
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(color: CColors.grey)),
+        TextSpan(
+            text: CTexts.privacyPolicy,
+            style: Theme.of(context).textTheme.bodyLarge),
       ]),
     );
   }

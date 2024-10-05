@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:maser_project/core/constants/colors.dart';
+import 'package:maser_project/core/constants/sizes.dart';
+import 'package:maser_project/core/constants/texts.dart';
 import 'package:maser_project/core/helpers/validators.dart';
 import 'package:maser_project/core/params/params.dart';
-import 'package:maser_project/core/theming/text_styles.dart';
-import 'package:maser_project/core/widgets/text_button.dart';
-import 'package:maser_project/core/widgets/text_form_field.dart';
+import 'package:maser_project/core/common_widgets/text_button.dart';
+import 'package:maser_project/core/common_widgets/text_form_field.dart';
 import 'package:maser_project/features/authentication/domain/entities/signup_request_data_entity.dart';
 import 'package:maser_project/features/authentication/presentation/bloc/signup/signup_bloc.dart';
 import 'package:maser_project/features/authentication/presentation/pages/signup/widgets/password_validations.dart';
@@ -51,7 +53,7 @@ class _SignupFormState extends State<SignupForm> {
           ),
 
           // Space
-          SpacingHelper.verticalSpacing(18),
+          verticalSpacing(CSizes.xl),
 
           // Email
           CustomTextFormField(
@@ -61,7 +63,7 @@ class _SignupFormState extends State<SignupForm> {
           ),
 
           // Space
-          SpacingHelper.verticalSpacing(18),
+          verticalSpacing(CSizes.xl),
 
           // Phone
           CustomTextFormField(
@@ -71,7 +73,7 @@ class _SignupFormState extends State<SignupForm> {
           ),
 
           // Space
-          SpacingHelper.verticalSpacing(18),
+          verticalSpacing(CSizes.xl),
 
           // Password
           CustomTextFormField(
@@ -87,7 +89,7 @@ class _SignupFormState extends State<SignupForm> {
           ),
 
           // Space
-          SpacingHelper.verticalSpacing(18),
+          verticalSpacing(CSizes.xl),
 
           // Password Cinfirmation
           CustomTextFormField(
@@ -104,16 +106,19 @@ class _SignupFormState extends State<SignupForm> {
           ),
 
           // Space
-          SpacingHelper.verticalSpacing(40),
+          verticalSpacing(CSizes.xxx),
 
           // Signup Button
           CustomTextButton(
-            buttonText: 'Create account',
-            textStyle: TextStyles.font16WhiteWeightSemiBold,
+            buttonText: CTexts.createAccount,
+            textStyle: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(color: CColors.white),
             onpressed: () {
               if (formKey.currentState!.validate()) {
                 // Add Event to bloc
-                context.read<SignupBloc>().add(SignupEvent.started(
+                context.read<SignupBloc>().add(UserSignup(
                     params: SignupParams(
                         data: SignupRequestDataEntity(
                             name: nameController.text,

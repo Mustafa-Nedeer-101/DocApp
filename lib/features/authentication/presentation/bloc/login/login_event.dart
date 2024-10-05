@@ -1,6 +1,8 @@
 part of 'login_bloc.dart';
 
-@freezed
-class LoginEvent with _$LoginEvent {
-  const factory LoginEvent.started(LoginParams params) = _Started;
+sealed class LoginEvent {}
+
+final class UserLogin extends LoginEvent {
+  LoginParams params;
+  UserLogin({required this.params});
 }

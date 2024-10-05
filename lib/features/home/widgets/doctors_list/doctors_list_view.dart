@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:maser_project/core/constants/colors.dart';
+import 'package:maser_project/core/common_widgets/doctor_card.dart';
 import 'package:maser_project/features/doctors/domain/entities/doctor_entity.dart';
-
-import 'doctors_list_view_item.dart';
 
 class DoctorsListView extends StatelessWidget {
   const DoctorsListView({
@@ -15,9 +15,11 @@ class DoctorsListView extends StatelessWidget {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: doctors.length,
+      itemCount: 4,
       itemBuilder: (context, index) {
-        return DoctorsListViewItem(
+        return CustomDoctorCard(
+          elevation: 0.0,
+          color: CColors.white,
           doctor: doctors[index],
         );
       },

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:maser_project/core/constants/colors.dart';
 import 'package:maser_project/core/helpers/spacing.dart';
-import 'package:maser_project/core/theming/text_styles.dart';
+import 'package:maser_project/core/theme/text_styles.dart';
 
 class HomeDoctorsBanner extends StatelessWidget {
   const HomeDoctorsBanner({super.key});
@@ -68,7 +68,7 @@ class FindNearby extends StatelessWidget {
         ),
 
         // Space
-        SpacingHelper.verticalSpacing(16),
+        verticalSpacing(16),
 
         // Button
         Expanded(

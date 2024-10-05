@@ -1,10 +1,19 @@
 part of 'login_bloc.dart';
 
-@freezed
-class LoginState with _$LoginState {
-  const factory LoginState.initial() = _Initial;
-  const factory LoginState.loading() = _LoginLoading;
-  const factory LoginState.success({required LoginResponseDataEntity data}) =
-      _LoginSuccess;
-  const factory LoginState.failure({required Failure error}) = _LoginFailure;
+sealed class LoginState {}
+
+final class LoginInitialState extends LoginState {}
+
+final class LoginLoadingState extends LoginState {}
+
+final class LoginSuccessState extends LoginState {
+  final LoginResponseDataEntity data;
+
+  LoginSuccessState({required this.data});
+}
+
+final class LoginFailureState extends LoginState {
+  final Failure error;
+
+  LoginFailureState({required this.error});
 }

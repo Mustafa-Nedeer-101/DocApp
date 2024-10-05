@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:maser_project/core/constants/colors.dart';
+import 'package:maser_project/core/constants/sizes.dart';
 import 'package:maser_project/core/helpers/regex.dart';
 import 'package:maser_project/core/helpers/spacing.dart';
-import 'package:maser_project/core/theming/text_styles.dart';
+import 'package:maser_project/core/theme/text_styles.dart';
 
 class PasswordValidations extends StatelessWidget {
   const PasswordValidations({super.key, required this.passwordController});
@@ -11,34 +12,37 @@ class PasswordValidations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ValidationRow(
-          text: 'Has at least 1 lower case letter',
-          achieveFunction: RegexHelper.hasLowerCase,
-          passwordController: passwordController,
-        ),
-        ValidationRow(
-          text: 'Has at least 1 upper case letter',
-          achieveFunction: RegexHelper.hasUpperCase,
-          passwordController: passwordController,
-        ),
-        ValidationRow(
-          text: 'Has at least 1 special character',
-          achieveFunction: RegexHelper.hasSpecialCharacter,
-          passwordController: passwordController,
-        ),
-        ValidationRow(
-          text: 'Has at least 1 number',
-          achieveFunction: RegexHelper.hasNumber,
-          passwordController: passwordController,
-        ),
-        ValidationRow(
-          text: 'at least 8 letters long',
-          achieveFunction: RegexHelper.hasMinLength,
-          passwordController: passwordController,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(left: CSizes.md),
+      child: Column(
+        children: [
+          ValidationRow(
+            text: 'Has at least 1 lower case letter',
+            achieveFunction: RegexHelper.hasLowerCase,
+            passwordController: passwordController,
+          ),
+          ValidationRow(
+            text: 'Has at least 1 upper case letter',
+            achieveFunction: RegexHelper.hasUpperCase,
+            passwordController: passwordController,
+          ),
+          ValidationRow(
+            text: 'Has at least 1 special character',
+            achieveFunction: RegexHelper.hasSpecialCharacter,
+            passwordController: passwordController,
+          ),
+          ValidationRow(
+            text: 'Has at least 1 number',
+            achieveFunction: RegexHelper.hasNumber,
+            passwordController: passwordController,
+          ),
+          ValidationRow(
+            text: 'at least 8 letters long',
+            achieveFunction: RegexHelper.hasMinLength,
+            passwordController: passwordController,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -99,7 +103,7 @@ class _ValidationRowState extends State<ValidationRow> {
         ),
 
         // Space
-        SpacingHelper.horizontalSpacing(6),
+        horizontalSpacing(6),
 
         // Text
         Text(

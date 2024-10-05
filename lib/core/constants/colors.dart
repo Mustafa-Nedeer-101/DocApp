@@ -4,6 +4,7 @@ class CColors {
   static const Color primaryColor = Color(0xFF247CFF);
   static const Color lightPrimary = Color(0xFFF4F8FF);
   static const Color darkBlue = Color(0xFF242424);
+  static const Color black = Colors.black;
   static const Color grey = Color(0xFF757575);
   static const Color lightGrey = Color(0xFFC2C2C2);
   static const Color lighterGrey = Color(0xFFEDEDED);

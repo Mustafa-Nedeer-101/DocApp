@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:maser_project/features/authentication/data/models/signup_respose_data_model.dart';
 import '../../../../core/errors/exceptions.dart';
-import '../../../../core/networking/api_constants.dart';
+import '../../../../core/constants/api_constants.dart';
 import '../../../../core/params/params.dart';
 import '../models/login_request_data_model.dart';
 import '../models/login_response_data_model.dart';

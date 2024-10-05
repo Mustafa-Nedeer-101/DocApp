@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:maser_project/core/theming/text_styles.dart';
+import 'package:maser_project/core/constants/colors.dart';
+import 'package:maser_project/core/constants/sizes.dart';
+import 'package:maser_project/core/constants/texts.dart';
 import 'package:maser_project/features/authentication/presentation/pages/onboarding/widgets/get_started_button.dart';
 import 'package:maser_project/features/authentication/presentation/pages/onboarding/widgets/onboarding_doc_logo.dart';
 import 'package:maser_project/features/authentication/presentation/pages/onboarding/widgets/onboarding_image_stack.dart';
@@ -12,35 +13,38 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(
-          top: 30.h,
-          bottom: 30.h,
+        padding: const EdgeInsets.only(
+          top: CSizes.defaultSpace,
+          bottom: CSizes.xxx,
         ),
         child: Column(
           children: [
             const OnboardingLogo(),
 
             // Space
-            SizedBox(
-              height: 10.h,
+            const SizedBox(
+              height: CSizes.spaceBtwItems,
             ),
 
             const OnboardingImageStack(),
 
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.w),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: CSizes.defaultSpace),
               child: Column(
                 children: [
                   // Description Text
                   Text(
-                    '''schedule and manage medical appointments with healthcare providers. real-time availability.''',
+                    CTexts.onboardingDescription,
                     textAlign: TextAlign.center,
-                    style: TextStyles.font10GreyWeightRegular,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: CColors.grey,
+                        ),
                   ),
 
                   // Space
-                  SizedBox(
-                    height: 30.h,
+                  const SizedBox(
+                    height: CSizes.spaceBtwSections,
                   ),
 
                   // Button

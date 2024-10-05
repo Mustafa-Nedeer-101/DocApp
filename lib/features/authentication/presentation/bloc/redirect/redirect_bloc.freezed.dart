@@ -66,6 +66,9 @@ class _$RedirectEventCopyWithImpl<$Res, $Val extends RedirectEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of RedirectEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -82,6 +85,9 @@ class __$$RedirectImplCopyWithImpl<$Res>
   __$$RedirectImplCopyWithImpl(
       _$RedirectImpl _value, $Res Function(_$RedirectImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of RedirectEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -228,6 +234,9 @@ class _$RedirectStateCopyWithImpl<$Res, $Val extends RedirectState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of RedirectState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -244,6 +253,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of RedirectState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -352,6 +364,9 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
   __$$AuthenticatedImplCopyWithImpl(
       _$AuthenticatedImpl _value, $Res Function(_$AuthenticatedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of RedirectState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -460,6 +475,9 @@ class __$$UnauthenticatedImplCopyWithImpl<$Res>
   __$$UnauthenticatedImplCopyWithImpl(
       _$UnauthenticatedImpl _value, $Res Function(_$UnauthenticatedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of RedirectState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

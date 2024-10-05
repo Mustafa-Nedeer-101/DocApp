@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:maser_project/features/doctors/data/models/doctor_model.dart';
 import '../../../../core/errors/exceptions.dart';
-import '../../../../core/networking/api_constants.dart';
+import '../../../../core/constants/api_constants.dart';
 import '../../../../core/params/params.dart';
 
 abstract interface class DoctorsRemoteDatasource {

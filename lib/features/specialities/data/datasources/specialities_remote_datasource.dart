@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:maser_project/core/networking/api_constants.dart';
+import 'package:maser_project/core/constants/api_constants.dart';
 import 'package:maser_project/features/specialities/data/models/speciality_model.dart';
 import '../../../../core/errors/exceptions.dart';
 import '../../../../core/params/params.dart';

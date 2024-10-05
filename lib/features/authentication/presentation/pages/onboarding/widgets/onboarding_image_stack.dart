@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:maser_project/core/constants/image_strings.dart';
-import 'package:maser_project/core/theming/text_styles.dart';
+import 'package:maser_project/core/constants/colors.dart';
+import 'package:maser_project/core/constants/images.dart';
+import 'package:maser_project/core/constants/texts.dart';
 
 class OnboardingImageStack extends StatelessWidget {
   const OnboardingImageStack({super.key});
@@ -37,13 +38,17 @@ class OnboardingImageStack extends StatelessWidget {
           ),
 
           // Text
-          Positioned(
+          const Positioned(
               bottom: 30,
               left: 0,
               right: 0,
               child: Text(
-                'Best Doctor\nAppointment App',
-                style: TextStyles.font32PrimaryWeightBold.copyWith(height: 1.4),
+                CTexts.bestDoctor,
+                style: TextStyle(
+                    fontSize: 64,
+                    fontWeight: FontWeight.bold,
+                    color: CColors.primaryColor,
+                    height: 1.4),
                 textAlign: TextAlign.center,
               )),
         ],
