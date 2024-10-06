@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:maser_project/core/constants/colors.dart';
-import 'package:maser_project/core/dep_injection/dependency_injection.dart';
+import 'package:maser_project/core/dependency_injection/dependency_injection.dart';
+import 'package:maser_project/core/theme/app_theme.dart';
 import 'package:maser_project/routing/app_router.dart';
 import 'package:maser_project/routing/routes.dart';
 
@@ -10,6 +10,7 @@ void main() async {
 
   // Getit
   setupDependencyInjecion();
+
   // For ScreenUtils bug with texts in release version
   await ScreenUtil.ensureScreenSize();
 
@@ -31,15 +32,11 @@ class DocApp extends StatelessWidget {
       child: SafeArea(
         child: MaterialApp(
           title: 'Doc App',
-          theme: ThemeData(
-            primaryColor: CColors.primaryColor,
-            scaffoldBackgroundColor: Colors.white,
-            colorScheme: ColorScheme.fromSeed(seedColor: CColors.primaryColor),
-            useMaterial3: true,
-          ),
+          themeMode: ThemeMode.system,
+          theme: CustomAppTheme.lightTheme,
+          darkTheme: CustomAppTheme.darkTheme,
           debugShowCheckedModeBanner: false,
-          initialRoute:
-              Routes.onboardingScreen, // First route passed to generate
+          initialRoute: Routes.redirectScreen, // First route passed to generate
           onGenerateRoute: appRouter.generateRoute,
         ),
       ),

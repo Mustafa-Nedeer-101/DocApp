@@ -1,6 +1,9 @@
 part of 'signup_bloc.dart';
 
-@freezed
-class SignupEvent with _$SignupEvent {
-  const factory SignupEvent.started({required SignupParams params}) = Started;
+sealed class SignupEvent {}
+
+final class UserSignup extends SignupEvent {
+  final SignupParams params;
+
+  UserSignup({required this.params});
 }

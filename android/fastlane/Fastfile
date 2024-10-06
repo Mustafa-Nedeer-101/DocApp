@@ -7,12 +7,12 @@ platform :android do
     sh "flutter clean"
     sh "flutter build apk --release --flavor production --target lib/main_production.dart --no-tree-shake-icons"
     firebase_app_distribution(
-      app: "1:23511851150:android:dae09c005f913daae029df",
+      app: "1:23511851150:android:4bad994249b0a4f7e029df", 
       firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/flutter-apk/app-production-release.apk",
-      testers: "mustafanedeer1@gmail.com",
-      release_notes: "First Fastlane Firebase Android Distribution."
+      testers: "mustafanedeer1@gmail.com, ndyrmhmd322@gmail.com, mndyr920@gmail.com",
+      release_notes: "Auth Feature Testing with HomeScreen using GitHub Actions."
     )
   end
 end

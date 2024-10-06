@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:maser_project/core/constants/colors.dart';
+import 'package:maser_project/core/constants/sizes.dart';
+import 'package:maser_project/core/constants/spacing_styles.dart';
 import 'package:maser_project/core/helpers/extensions.dart';
-import 'package:maser_project/core/helpers/spacing.dart';
-import 'package:maser_project/core/theming/text_styles.dart';
+import 'package:maser_project/core/theme/text_styles.dart';
 import 'package:maser_project/features/authentication/presentation/bloc/login/login_bloc.dart';
 import 'package:maser_project/features/authentication/presentation/pages/login/widgets/dont_have_account.dart';
 import 'package:maser_project/features/authentication/presentation/pages/login/widgets/login_form.dart';
-import 'package:maser_project/features/authentication/presentation/pages/signup/widgets/terms_and_conditions.dart';
+import 'package:maser_project/features/authentication/presentation/pages/login/widgets/login_header.dart';
+import 'package:maser_project/features/authentication/presentation/pages/login/widgets/terms_and_conditions.dart';
 import 'package:maser_project/routing/routes.dart';
 
 class LoginPage extends StatelessWidget {
@@ -18,63 +19,50 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
+        padding: CSpacingStyles.paddingWithAppBarHeight,
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'Welcome Back',
-                style: TextStyles.font24PrimaryWeightBold,
-              ),
+              // Header
+              const LoginHeader(),
 
               // Space
-              SpacingHelper.verticalSpacing(8),
-
-              // Paragraph
-              Text(
-                'We\'re excited to have you back, can\'t wait to see what you\'ve been up to since you last logged in.',
-                style: TextStyles.font14GreyWeightRegular,
-              ),
-
-              // Space
-              SpacingHelper.verticalSpacing(36),
+              const SizedBox(height: CSizes.spaceBtwSections),
 
               // Form & Listener
               BlocListener<LoginBloc, LoginState>(
                 listener: (context, state) {
-                  state.whenOrNull(
-                    // Loading
-                    loading: () {
+                  switch (state) {
+                    case LoginLoadingState():
                       showDialog(
                         context: context,
                         builder: (context) => const Center(
                           child: CircularProgressIndicator(),
                         ),
                       );
-                    },
+                    case LoginFailureState():
+                      return handleErrorState(
+                          context, state.error.errorMessage);
 
-                    // Success
-                    success: (data) {
+                    case LoginSuccessState():
                       context.pop();
-                      context.pushNamed(Routes.homeScreen);
-                    },
+                      context.pushReplacementNamed(Routes.homeScreen);
 
-                    // Error
-                    failure: (error) =>
-                        handleErrorState(context, error.errorMessage),
-                  );
+                    case LoginInitialState():
+                      null;
+                  }
                 },
                 child: const LoginForm(),
               ),
 
               // Space
-              SpacingHelper.verticalSpacing(16),
+              const SizedBox(height: CSizes.spaceBtwSections),
 
               const TermsAndConditions(),
 
               // Space
-              SpacingHelper.verticalSpacing(60),
+              const SizedBox(height: CSizes.spaceBtwSections),
 
               const DontHaveAccount(),
             ],

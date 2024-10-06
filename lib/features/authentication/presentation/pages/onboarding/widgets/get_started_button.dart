@@ -1,9 +1,7 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
+import 'package:maser_project/core/constants/texts.dart';
 import 'package:maser_project/core/helpers/extensions.dart';
 import 'package:maser_project/core/constants/colors.dart';
-import 'package:maser_project/core/theming/text_styles.dart';
 import 'package:maser_project/routing/routes.dart';
 
 class GetStartedButton extends StatelessWidget {
@@ -13,18 +11,20 @@ class GetStartedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        context.pushNamed(Routes.loginScreen);
+        context.pushReplacementNamed(Routes.loginScreen);
       },
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(CColors.primaryColor),
+          backgroundColor: WidgetStateProperty.all(CColors.primaryColor),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          minimumSize:
-              MaterialStateProperty.all(const Size(double.infinity, 52)),
-          shape: MaterialStateProperty.all(
+          minimumSize: WidgetStateProperty.all(const Size(double.infinity, 52)),
+          shape: WidgetStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)))),
       child: Text(
-        'Get Started',
-        style: TextStyles.font16WhiteWeightSemiBold,
+        CTexts.getStarted,
+        style: Theme.of(context)
+            .textTheme
+            .headlineSmall
+            ?.copyWith(color: CColors.white),
       ),
     );
   }

@@ -5,7 +5,7 @@ import 'package:maser_project/core/helpers/spacing.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../../core/constants/colors.dart';
-import '../../../../../core/theming/text_styles.dart';
+import '../../../../../core/theme/text_styles.dart';
 
 class DoctorsListViewItem extends StatelessWidget {
   const DoctorsListViewItem({
@@ -52,7 +52,7 @@ class DoctorsListViewItem extends StatelessWidget {
           ),
 
           // Space
-          SpacingHelper.horizontalSpacing(16),
+          horizontalSpacing(16),
 
           // Doctor Info
           Expanded(
@@ -66,7 +66,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
 
-                SpacingHelper.verticalSpacing(5),
+                verticalSpacing(5),
 
                 //
                 Text(
@@ -74,7 +74,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   style: TextStyles.font12GreyWeightMedium,
                 ),
 
-                SpacingHelper.verticalSpacing(5),
+                verticalSpacing(5),
 
                 // Email
                 Text(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:maser_project/core/constants/image_strings.dart';
-import 'package:maser_project/core/theming/text_styles.dart';
+import 'package:maser_project/core/constants/images.dart';
+import 'package:maser_project/core/constants/sizes.dart';
+import 'package:maser_project/core/constants/texts.dart';
 
 class OnboardingLogo extends StatelessWidget {
   const OnboardingLogo({super.key});
@@ -13,18 +13,18 @@ class OnboardingLogo extends StatelessWidget {
       // Logo
       SvgPicture.asset(
         CImages.appLogo,
-        height: 50.h,
-        width: 50.w,
+        width: CSizes.iconLg,
+        height: CSizes.iconLg,
       ),
 
-      SizedBox(
-        width: 10.w,
+      const SizedBox(
+        width: CSizes.sm,
       ),
 
       // text
       Text(
-        'DocDoc',
-        style: TextStyles.font24BlackWeightBold,
+        CTexts.logoName,
+        style: Theme.of(context).textTheme.headlineLarge,
       ),
     ]);
   }

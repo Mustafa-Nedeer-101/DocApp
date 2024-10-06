@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:maser_project/core/constants/colors.dart';
 import 'package:maser_project/core/helpers/spacing.dart';
-import 'package:maser_project/core/theming/text_styles.dart';
+import 'package:maser_project/core/theme/text_styles.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -36,7 +36,7 @@ class WelcomMessage extends StatelessWidget {
           'Hi, $name',
           style: TextStyles.font18DarkBlueWeightBold,
         ),
-        SpacingHelper.verticalSpacing(6),
+        verticalSpacing(6),
         Text(
           'How Are You Today?',
           style: TextStyles.font12GreyWeightRegular,

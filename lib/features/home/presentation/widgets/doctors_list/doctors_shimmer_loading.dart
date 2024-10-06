@@ -30,7 +30,7 @@ class DoctorsShimmerLoading extends StatelessWidget {
                     ),
                   ),
                 ),
-                SpacingHelper.horizontalSpacing(16),
+                horizontalSpacing(16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +47,7 @@ class DoctorsShimmerLoading extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SpacingHelper.verticalSpacing(12),
+                      verticalSpacing(12),
                       Shimmer.fromColors(
                         baseColor: CColors.lightGrey,
                         highlightColor: Colors.white,
@@ -60,7 +60,7 @@ class DoctorsShimmerLoading extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SpacingHelper.verticalSpacing(12),
+                      verticalSpacing(12),
                       Shimmer.fromColors(
                         baseColor: CColors.lightGrey,
                         highlightColor: Colors.white,

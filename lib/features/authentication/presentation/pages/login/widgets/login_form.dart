@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:maser_project/core/constants/colors.dart';
+import 'package:maser_project/core/constants/sizes.dart';
+import 'package:maser_project/core/constants/texts.dart';
 import 'package:maser_project/core/helpers/validators.dart';
 import 'package:maser_project/core/params/params.dart';
 import 'package:maser_project/features/authentication/domain/entities/login_request_data_entity.dart';
 import 'package:maser_project/features/authentication/presentation/bloc/login/login_bloc.dart';
 import '../../../../../../core/helpers/spacing.dart';
-import '../../../../../../core/theming/text_styles.dart';
-import '../../../../../../core/widgets/text_button.dart';
-import '../../../../../../core/widgets/text_form_field.dart';
+import '../../../../../../core/common_widgets/text_button.dart';
+import '../../../../../../core/common_widgets/text_form_field.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -36,46 +38,53 @@ class LoginFormState extends State<LoginForm> {
         children: [
           // Email
           CustomTextFormField(
-            hintText: 'Email',
+            hintText: CTexts.email,
             controller: emailController,
             validator: ValidationHelper.validateEmail,
           ),
 
           // Space
-          SpacingHelper.verticalSpacing(18),
+          verticalSpacing(CSizes.xl),
 
           // Password
           CustomTextFormField(
-            hintText: 'Password',
+            hintText: CTexts.password,
             controller: passwordController,
             validator: (pass) =>
-                ValidationHelper.validateEmptyText('Password', pass),
+                ValidationHelper.validateEmptyText(CTexts.password, pass),
             password: true,
           ),
+
+          // Space
+          verticalSpacing(CSizes.defaultSpace),
 
           // ForgotPassword
           Align(
             alignment: AlignmentDirectional.centerEnd,
             child: Text(
-              'Forgot Password',
-              style: TextStyles.font13PrimaryWeightRegular,
+              CTexts.forgotPassword,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
 
           // Space
-          SpacingHelper.verticalSpacing(40),
+          verticalSpacing(CSizes.xxx),
 
           // Login Button
           CustomTextButton(
-            buttonText: 'Login',
-            textStyle: TextStyles.font16WhiteWeightSemiBold,
+            buttonText: CTexts.login,
+            textStyle: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(color: CColors.white),
             onpressed: () {
               if (formKey.currentState!.validate()) {
                 // Add Event to Bloc
-                context.read<LoginBloc>().add(LoginEvent.started(LoginParams(
-                    data: LoginRequestDataEntity(
-                        password: passwordController.text,
-                        email: emailController.text))));
+                context.read<LoginBloc>().add(UserLogin(
+                    params: LoginParams(
+                        data: LoginRequestDataEntity(
+                            password: passwordController.text,
+                            email: emailController.text))));
               }
             },
           ),

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:maser_project/core/constants/colors.dart';
+import 'package:maser_project/core/constants/sizes.dart';
 import 'package:maser_project/core/helpers/extensions.dart';
 import 'package:maser_project/core/helpers/spacing.dart';
-import 'package:maser_project/core/theming/text_styles.dart';
+import 'package:maser_project/core/theme/text_styles.dart';
 import 'package:maser_project/features/authentication/presentation/bloc/signup/signup_bloc.dart';
 import 'package:maser_project/features/authentication/presentation/pages/signup/widgets/already_have_account.dart';
 import 'package:maser_project/features/authentication/presentation/pages/signup/widgets/signup_form.dart';
+import 'package:maser_project/features/authentication/presentation/pages/signup/widgets/signup_header.dart';
 import 'package:maser_project/features/authentication/presentation/pages/signup/widgets/terms_and_conditions.dart';
 import 'package:maser_project/routing/routes.dart';
 
@@ -21,60 +23,50 @@ class SignupPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'Welcome Back',
-                style: TextStyles.font24PrimaryWeightBold,
-              ),
+              // Header
+              const SignupHeader(),
 
               // Space
-              SpacingHelper.verticalSpacing(8),
-
-              // Paragraph
-              Text(
-                'We\'re excited to have you back, can\'t wait to see what you\'ve been up to since you last logged in.',
-                style: TextStyles.font14GreyWeightRegular,
-              ),
-
-              // Space
-              SpacingHelper.verticalSpacing(36),
+              verticalSpacing(CSizes.spaceBtwSections),
 
               // Form & Listener
               BlocListener<SignupBloc, SignupState>(
                 listener: (context, state) {
-                  state.whenOrNull(
+                  switch (state) {
                     // Loading
-                    loading: () {
+                    case SignupLoadingState():
                       showDialog(
                         context: context,
                         builder: (context) => const Center(
                           child: CircularProgressIndicator(),
                         ),
                       );
-                    },
 
                     // Success
-                    success: (data) {
+                    case SignupSuccessState():
                       context.pop();
-                      context.pushNamed(Routes.homeScreen);
-                    },
+                      context.pushReplacementNamed(Routes.homeScreen);
 
                     // Error
-                    failure: (error) =>
-                        handleErrorState(context, error.errorMessage),
-                  );
+                    case SignupFailureState():
+                      handleErrorState(context, state.error.errorMessage);
+
+                    case SignupInitialState():
+                      null;
+                  }
                 },
                 child: const SignupForm(),
               ),
 
               // Space
-              SpacingHelper.verticalSpacing(16),
+              const SizedBox(height: CSizes.spaceBtwSections),
 
               const TermsAndConditions(),
 
               // Space
-              SpacingHelper.verticalSpacing(60),
+              const SizedBox(height: CSizes.spaceBtwSections),
 
               const AlreadyHaveAccount(),
             ],

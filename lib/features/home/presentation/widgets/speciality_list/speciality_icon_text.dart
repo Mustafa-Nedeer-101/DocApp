@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:maser_project/features/home/presentation/widgets/speciality_list/speciality_icon.dart';
-import '../../../../../core/theming/text_styles.dart';
+import '../../../../../core/theme/text_styles.dart';
 
 class CustomDoctorSpecialityIconText extends StatelessWidget {
   const CustomDoctorSpecialityIconText(
