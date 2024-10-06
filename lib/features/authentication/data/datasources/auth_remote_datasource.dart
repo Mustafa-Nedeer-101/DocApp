@@ -23,18 +23,14 @@ class AuthRemoteDatasourceImp implements AuthRemoteDatasource {
         "${ApiConstants.apiBaseUrl}${ApiConstants.login}",
         data: LoginRequestDataModel.fromEntity(params.data).toJson());
 
-    try {
-      if (response.statusCode == 200) {
-        final body = response.data as Map;
-        final json = body['data'] as Map<String, dynamic>;
-        final model = LoginResponseDataModel.fromJson(json);
+    if (response.statusCode == 200) {
+      final body = response.data as Map;
+      final json = body['data'] as Map<String, dynamic>;
+      final model = LoginResponseDataModel.fromJson(json);
 
-        return model;
-      } else {
-        throw ServerException(message: 'An error at the server side!');
-      }
-    } catch (e) {
-      rethrow;
+      return model;
+    } else {
+      throw ServerException(message: response.data);
     }
   }
 
