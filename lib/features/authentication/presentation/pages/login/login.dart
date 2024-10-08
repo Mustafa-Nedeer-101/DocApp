@@ -42,8 +42,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       );
                     case LoginFailureState():
-                      return handleErrorState(
-                          context, state.error.errorMessage);
+                      return handleErrorState(context, state.error.message);
 
                     case LoginSuccessState():
                       context.pop();
@@ -95,7 +94,10 @@ void handleErrorState(BuildContext context, String error) {
           },
           child: Text(
             'Got it',
-            style: TextStyles.font14BlueWeightSemiBold,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(color: CColors.primaryColor),
           ),
         ),
       ],

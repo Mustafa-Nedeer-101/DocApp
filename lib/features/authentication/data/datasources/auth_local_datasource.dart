@@ -17,9 +17,13 @@ class AuthLocalDatasourceImp implements AuthLocalDatasource {
 
   @override
   Future<String> getUserToken() async {
-    final result = localStorage.fetchString(SharedPrefKeys.userToken);
+    try {
+      final result = localStorage.fetchString(SharedPrefKeys.userToken);
 
-    return await result ?? "";
+      return await result ?? "";
+    } catch (e) {
+      throw "Couldn't get your information!";
+    }
   }
 
   @override
@@ -28,7 +32,7 @@ class AuthLocalDatasourceImp implements AuthLocalDatasource {
       return await localStorage.storeString(
           SharedPrefKeys.userToken, params.token);
     } catch (e) {
-      throw "Couldn't save your information";
+      throw "Couldn't save your information!";
     }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:maser_project/core/errors/exceptions.dart';
+import 'package:maser_project/core/errors/error_handler.dart';
 import 'package:maser_project/core/errors/failure.dart';
 import 'package:maser_project/features/doctors/data/datasources/doctors_remote_datasource.dart';
 import 'package:maser_project/features/doctors/domain/entities/doctor_entity.dart';
@@ -17,10 +17,8 @@ class DoctorsRepoImp implements DoctorsRepo {
       final response = await datasource.getDoctors(params: params);
 
       return Right(response);
-    } on ServerException catch (e) {
-      return Left(ServerFailure(errorMessage: e.message));
     } catch (e) {
-      return Left(UnknownFailure(errorMessage: e.toString()));
+      return Left(ErrorHandler.exceptionToFailure(e));
     }
   }
 }
