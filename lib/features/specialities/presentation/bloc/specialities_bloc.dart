@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:maser_project/core/dependency_injection/dependency_injection.dart';
 import 'package:maser_project/core/errors/failure.dart';
 import 'package:maser_project/core/params/params.dart';
@@ -10,13 +9,12 @@ import '../../domain/entities/speciality_entity.dart';
 
 part 'specialities_event.dart';
 part 'specialities_state.dart';
-part 'specialities_bloc.freezed.dart';
 
 class SpecialitiesBloc extends Bloc<SpecialitiesEvent, SpecialitiesState> {
-  SpecialitiesBloc() : super(const _Initial()) {
-    on<_Started>((event, emit) async {
+  SpecialitiesBloc() : super(SpecialitiesLoadingState()) {
+    on<GetSpecialitiesEvent>((event, emit) async {
       // Start Loading
-      emit(const SpecialitiesState.loading());
+      emit(SpecialitiesLoadingState());
 
       // Get Specialities
       final result =
@@ -25,9 +23,9 @@ class SpecialitiesBloc extends Bloc<SpecialitiesEvent, SpecialitiesState> {
 
       // Success or Failure
       result.fold((left) {
-        emit(SpecialitiesState.failure(error: left));
+        emit(SpecialitiesFailureState(error: left));
       }, (right) {
-        emit(SpecialitiesState.success(data: right));
+        emit(SpecialitiesSuccessState(data: right));
       });
     });
   }

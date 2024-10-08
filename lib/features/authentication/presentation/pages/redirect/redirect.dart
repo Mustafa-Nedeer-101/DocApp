@@ -11,14 +11,19 @@ class RedirectScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<RedirectBloc, RedirectState>(
       listener: (context, state) {
-        state.when(
-            initial: () {},
-            authenticated: () {
-              context.pushReplacementNamed(Routes.homeScreen);
-            },
-            unauthenticated: () {
-              context.pushReplacementNamed(Routes.onboardingScreen);
-            });
+        switch (state) {
+          case RedirectInitialState():
+            showDialog(
+              context: context,
+              builder: (context) => const Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          case RedirectAuthenticatedState():
+            context.pushReplacementNamed(Routes.homeScreen);
+          case RedirectUnauthenticatedState():
+            context.pushReplacementNamed(Routes.onboardingScreen);
+        }
       },
       child: const ChildWidget(),
     );
@@ -33,7 +38,7 @@ class ChildWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Add Event
-    context.read<RedirectBloc>().add(const RedirectEvent.started());
+    context.read<RedirectBloc>().add(StartRedirectEvent());
 
     return const Scaffold(
       body: Center(

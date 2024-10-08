@@ -12,30 +12,30 @@ class RecommendationDoctorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<DoctorsBloc>().add(const DoctorsEvent.started());
+    context.read<DoctorsBloc>().add(GetDoctorsEvent());
 
     return Scaffold(
       backgroundColor: CColors.white,
       appBar: const CustomAppBar(title: 'Doctor Recommendation'),
       body: BlocBuilder<DoctorsBloc, DoctorsState>(
         builder: (context, state) {
-          return state.maybeWhen(loading: () {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }, success: (data) {
-            return SuccessScreen(
-              doctors: data,
-            );
-          }, failure: (error) {
-            return Center(
-              child: Text(error.message),
-            );
-          }, orElse: () {
-            return const Center(
-              child: Text('Error!!'),
-            );
-          });
+          switch (state) {
+            case DoctorsLoadingState():
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+
+            case DoctorsSuccessState():
+              final data = state.data;
+
+              return SuccessScreen(
+                doctors: data,
+              );
+            case DoctorsFailureState():
+              return Center(
+                child: Text(state.error.message),
+              );
+          }
         },
       ),
     );

@@ -41,9 +41,8 @@ class SearchBox extends StatelessWidget {
     return Expanded(
       child: TextField(
         onSubmitted: (value) {
-          context
-              .read<DoctorsBloc>()
-              .add(DoctorsEvent.search(searchBy.searchBy, value));
+          context.read<DoctorsBloc>().add(
+              SearchDoctorsEvent(searchBy: searchBy.searchBy, value: value));
         },
         decoration: InputDecoration(
             contentPadding:

@@ -1,10 +1,17 @@
 part of 'doctors_bloc.dart';
 
-@freezed
-class DoctorsState with _$DoctorsState {
-  const factory DoctorsState.initial() = _Initial;
-  const factory DoctorsState.loading() = DocLoading;
-  const factory DoctorsState.success({required List<DoctorEntity> data}) =
-      DocSuccess;
-  const factory DoctorsState.failure({required Failure error}) = DocFailure;
+sealed class DoctorsState {}
+
+final class DoctorsLoadingState extends DoctorsState {}
+
+final class DoctorsSuccessState extends DoctorsState {
+  final List<DoctorEntity> data;
+
+  DoctorsSuccessState({required this.data});
+}
+
+final class DoctorsFailureState extends DoctorsState {
+  final Failure error;
+
+  DoctorsFailureState({required this.error});
 }

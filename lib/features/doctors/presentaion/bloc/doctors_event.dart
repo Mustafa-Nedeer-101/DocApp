@@ -1,8 +1,12 @@
 part of 'doctors_bloc.dart';
 
-@freezed
-class DoctorsEvent with _$DoctorsEvent {
-  const factory DoctorsEvent.started() = _Started;
+sealed class DoctorsEvent {}
 
-  const factory DoctorsEvent.search(SearchBy searchBy, String value) = _Search;
+final class GetDoctorsEvent extends DoctorsEvent {}
+
+final class SearchDoctorsEvent extends DoctorsEvent {
+  final SearchBy searchBy;
+  final String value;
+
+  SearchDoctorsEvent({required this.searchBy, required this.value});
 }
