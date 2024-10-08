@@ -29,7 +29,7 @@ class RecommendationDoctorPage extends StatelessWidget {
             );
           }, failure: (error) {
             return Center(
-              child: Text('${error.errorHeader}:${error.errorMessage}'),
+              child: Text(error.message),
             );
           }, orElse: () {
             return const Center(

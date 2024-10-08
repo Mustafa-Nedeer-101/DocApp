@@ -36,8 +36,7 @@ class DocApp extends StatelessWidget {
           theme: CustomAppTheme.lightTheme,
           darkTheme: CustomAppTheme.darkTheme,
           debugShowCheckedModeBanner: false,
-          initialRoute:
-              Routes.onboardingScreen, // First route passed to generate
+          initialRoute: Routes.redirectScreen, // First route passed to generate
           onGenerateRoute: appRouter.generateRoute,
         ),
       ),

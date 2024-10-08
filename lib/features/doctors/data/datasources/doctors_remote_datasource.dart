@@ -20,18 +20,15 @@ class DoctorsRemoteDatasourceImp implements DoctorsRemoteDatasource {
               'Authorization': 'Bearer ${params.token}',
             }));
 
-    try {
-      if (response.statusCode == 200) {
-        final body = response.data as Map;
-        final data = body['data'] as List;
-        return data
-            .map((e) => DoctorModel.fromJson(e as Map<String, dynamic>))
-            .toList();
-      } else {
-        throw ServerException(message: 'An error at the server side!');
-      }
-    } catch (e) {
-      rethrow;
+    if (response.statusCode == 200) {
+      final body = response.data as Map;
+      final data = body['data'] as List;
+      return data
+          .map((e) => DoctorModel.fromJson(e as Map<String, dynamic>))
+          .toList();
+    } else {
+      throw LogicException(
+          message: response.statusMessage ?? 'Something went wrong');
     }
   }
 }

@@ -51,7 +51,7 @@ class SignupPage extends StatelessWidget {
 
                     // Error
                     case SignupFailureState():
-                      handleErrorState(context, state.error.errorMessage);
+                      handleErrorState(context, state.error.message);
 
                     case SignupInitialState():
                       null;
