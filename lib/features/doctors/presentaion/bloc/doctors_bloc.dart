@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:maser_project/core/constants/eums.dart';
 import 'package:maser_project/core/dependency_injection/dependency_injection.dart';
 import 'package:maser_project/core/errors/failure.dart';
@@ -11,15 +10,14 @@ import 'package:maser_project/features/doctors/domain/usecases/search_doctors_us
 
 part 'doctors_event.dart';
 part 'doctors_state.dart';
-part 'doctors_bloc.freezed.dart';
 
 class DoctorsBloc extends Bloc<DoctorsEvent, DoctorsState> {
   final List<DoctorEntity> listOfDoctors = [];
 
-  DoctorsBloc() : super(const _Initial()) {
-    on<_Started>((event, emit) async {
+  DoctorsBloc() : super(DoctorsLoadingState()) {
+    on<GetDoctorsEvent>((event, emit) async {
       // Start Loading
-      emit(const DoctorsState.loading());
+      emit(DoctorsLoadingState());
 
       // Get Doctors
       final result = await GetDoctorsUsecase(repo: getIt<DoctorsRepoImp>())
@@ -27,21 +25,21 @@ class DoctorsBloc extends Bloc<DoctorsEvent, DoctorsState> {
 
       // Success or Failure
       result.fold((left) {
-        emit(DoctorsState.failure(error: left));
+        emit(DoctorsFailureState(error: left));
       }, (right) {
         listOfDoctors.addAll(right);
 
-        emit(DoctorsState.success(data: right));
+        emit(DoctorsSuccessState(data: right));
       });
     });
 
-    on<_Search>((event, emit) {
-      emit(const DoctorsState.loading());
+    on<SearchDoctorsEvent>((event, emit) {
+      emit(DoctorsLoadingState());
 
       final List<DoctorEntity> searchedDoctors = SearchDoctorsUsecase().call(
           doctors: listOfDoctors, searchBy: event.searchBy, value: event.value);
 
-      emit(DoctorsState.success(data: searchedDoctors));
+      emit(DoctorsSuccessState(data: searchedDoctors));
     });
   }
 }

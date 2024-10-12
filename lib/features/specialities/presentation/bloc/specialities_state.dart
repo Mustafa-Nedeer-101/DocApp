@@ -1,10 +1,17 @@
 part of 'specialities_bloc.dart';
 
-@freezed
-class SpecialitiesState with _$SpecialitiesState {
-  const factory SpecialitiesState.initial() = _Initial;
-  const factory SpecialitiesState.loading() = SpecLoading;
-  const factory SpecialitiesState.success(
-      {required List<SpecialityEntity> data}) = SpecSuccess;
-  factory SpecialitiesState.failure({required Failure error}) = SpecFailure;
+sealed class SpecialitiesState {}
+
+final class SpecialitiesLoadingState extends SpecialitiesState {}
+
+final class SpecialitiesSuccessState extends SpecialitiesState {
+  final List<SpecialityEntity> data;
+
+  SpecialitiesSuccessState({required this.data});
+}
+
+final class SpecialitiesFailureState extends SpecialitiesState {
+  final Failure error;
+
+  SpecialitiesFailureState({required this.error});
 }

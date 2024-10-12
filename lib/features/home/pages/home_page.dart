@@ -18,8 +18,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Add Event
-    context.read<SpecialitiesBloc>().add(const SpecialitiesEvent.started());
-    context.read<DoctorsBloc>().add(const DoctorsEvent.started());
+    context.read<SpecialitiesBloc>().add(GetSpecialitiesEvent());
+    context.read<DoctorsBloc>().add(GetDoctorsEvent());
     return Scaffold(
       backgroundColor: CColors.white,
       body: Padding(
@@ -55,25 +55,23 @@ class HomePage extends StatelessWidget {
               // Doctor Speciality List
               BlocBuilder<SpecialitiesBloc, SpecialitiesState>(
                 builder: (context, state) {
-                  return state.maybeWhen(loading: () {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }, success: (data) {
-                    final specialitiesList = data;
+                  switch (state) {
+                    case SpecialitiesLoadingState():
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
 
-                    return DoctorSpecialityList(
-                      specialities: specialitiesList,
-                    );
-                  }, failure: (error) {
-                    return Center(
-                      child: Text(error.message),
-                    );
-                  }, orElse: () {
-                    return const Center(
-                      child: Text('Error!!'),
-                    );
-                  });
+                    case SpecialitiesSuccessState():
+                      final specialitiesList = state.data;
+
+                      return DoctorSpecialityList(
+                        specialities: specialitiesList,
+                      );
+                    case SpecialitiesFailureState():
+                      return Center(
+                        child: Text(state.error.message),
+                      );
+                  }
                 },
               ),
 
@@ -92,25 +90,23 @@ class HomePage extends StatelessWidget {
               // Doctors ListView
               BlocBuilder<DoctorsBloc, DoctorsState>(
                 builder: (context, state) {
-                  return state.maybeWhen(loading: () {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }, success: (data) {
-                    final doctorsList = data;
+                  switch (state) {
+                    case DoctorsLoadingState():
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
 
-                    return DoctorsListView(
-                      doctors: doctorsList,
-                    );
-                  }, failure: (error) {
-                    return Center(
-                      child: Text(error.message),
-                    );
-                  }, orElse: () {
-                    return const Center(
-                      child: Text('Error!!'),
-                    );
-                  });
+                    case DoctorsSuccessState():
+                      final doctorsList = state.data;
+
+                      return DoctorsListView(
+                        doctors: doctorsList,
+                      );
+                    case DoctorsFailureState():
+                      return Center(
+                        child: Text(state.error.message),
+                      );
+                  }
                 },
               ),
             ],

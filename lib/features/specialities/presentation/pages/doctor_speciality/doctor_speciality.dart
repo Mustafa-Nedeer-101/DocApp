@@ -11,29 +11,27 @@ class DoctorSpecialityPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Add Event
-    context.read<SpecialitiesBloc>().add(const SpecialitiesEvent.started());
+    context.read<SpecialitiesBloc>().add(GetSpecialitiesEvent());
 
     return Scaffold(
       appBar: const CustomAppBar(title: 'Doctor Speciality'),
       body: BlocBuilder<SpecialitiesBloc, SpecialitiesState>(
         builder: (context, state) {
-          return state.maybeWhen(loading: () {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }, success: (data) {
-            return SuccessScreen(
-              specialities: data,
-            );
-          }, failure: (error) {
-            return Center(
-              child: Text(error.message),
-            );
-          }, orElse: () {
-            return const Center(
-              child: Text('Error!!'),
-            );
-          });
+          switch (state) {
+            case SpecialitiesLoadingState():
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+
+            case SpecialitiesSuccessState():
+              return SuccessScreen(
+                specialities: state.data,
+              );
+            case SpecialitiesFailureState():
+              return Center(
+                child: Text(state.error.message),
+              );
+          }
         },
       ),
     );

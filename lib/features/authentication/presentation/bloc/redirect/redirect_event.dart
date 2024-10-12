@@ -1,6 +1,7 @@
 part of 'redirect_bloc.dart';
 
-@freezed
-class RedirectEvent with _$RedirectEvent {
-  const factory RedirectEvent.started() = Redirect;
-}
+sealed class RedirectEvent {}
+
+final class RedirectInitialEvent extends RedirectEvent {}
+
+final class StartRedirectEvent extends RedirectEvent {}
