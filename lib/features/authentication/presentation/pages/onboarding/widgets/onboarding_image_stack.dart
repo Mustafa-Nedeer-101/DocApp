@@ -38,17 +38,16 @@ class OnboardingImageStack extends StatelessWidget {
           ),
 
           // Text
-          const Positioned(
+          Positioned(
               bottom: 30,
               left: 0,
               right: 0,
               child: Text(
                 CTexts.bestDoctor,
-                style: TextStyle(
-                    fontSize: 64,
-                    fontWeight: FontWeight.bold,
-                    color: CColors.primaryColor,
-                    height: 1.4),
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineLarge!
+                    .copyWith(color: CColors.primaryColor, height: 1.2),
                 textAlign: TextAlign.center,
               )),
         ],
