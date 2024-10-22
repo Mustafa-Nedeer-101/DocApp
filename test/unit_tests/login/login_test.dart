@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:maser_project/core/constants/api_constants.dart';
+import 'package:maser_project/core/errors/exceptions.dart';
 import 'package:maser_project/core/params/params.dart';
 import 'package:maser_project/features/authentication/data/datasources/auth_remote_datasource.dart';
 import 'package:maser_project/features/authentication/data/models/login_response_data_model.dart';
@@ -48,6 +49,24 @@ void main() {
       expect(result, isA<LoginResponseDataModel>());
       expect(result.token,
           'mustafaisgenius!'); // You can assert more fields as needed
+      verify(mockDio.post(loginUrl, data: anyNamed('data'))).called(1);
+    });
+
+    test('should return Failure when the login call is not successful',
+        () async {
+      // Arrange
+      when(mockDio.post(loginUrl, data: anyNamed('data')))
+          .thenAnswer((_) async => Response(
+                data: {'message': 'Invalid credentials'},
+                statusCode: 400,
+                requestOptions: RequestOptions(path: loginUrl),
+              ));
+
+      // Act & Assert
+      expect(
+        () => datasource.login(params: loginParams),
+        throwsA(isA<LogicException>()),
+      );
       verify(mockDio.post(loginUrl, data: anyNamed('data'))).called(1);
     });
   });
